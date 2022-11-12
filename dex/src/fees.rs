@@ -4,27 +4,27 @@ use std::convert::TryInto;
 
 #[cfg(test)]
 use proptest_derive::Arbitrary;
-
-mod stable_markets {
-    pub mod usdt_usdc {
-        solana_program::declare_id!("77quYg4MGneUdjgXCunt9GgM1usmrxKY31twEy3WHwcS");
-    }
-    pub mod msol_sol {
-        solana_program::declare_id!("5cLrMai1DsLRYc1Nio9qMTicsWtvzjzZfJPXyAoF4t1Z");
-    }
-    pub mod ust_usdc {
-        solana_program::declare_id!("EERNEEnBqdGzBS8dd46wwNY5F2kwnaCQ3vsq2fNKGogZ");
-    }
-    pub mod ust_usdt {
-        solana_program::declare_id!("8sFf9TW3KzxLiBXcDcjAxqabEsRroo4EiRr3UG1xbJ9m");
-    }
-    pub mod stsol_sol {
-        solana_program::declare_id!("2iDSTGhjJEiRxNaLF27CY6daMYPs5hgYrP2REHd5YD62");
-    }
-    pub mod usdh_usdc {
-        solana_program::declare_id!("CaFjigEgJdtGPxQxRjneA1hzNcY5MsHoAAL6Et67QrC5");
-    }
-}
+//
+// mod stable_markets {
+//     pub mod usdt_usdc {
+//         solana_program::declare_id!("77quYg4MGneUdjgXCunt9GgM1usmrxKY31twEy3WHwcS");
+//     }
+//     pub mod msol_sol {
+//         solana_program::declare_id!("5cLrMai1DsLRYc1Nio9qMTicsWtvzjzZfJPXyAoF4t1Z");
+//     }
+//     pub mod ust_usdc {
+//         solana_program::declare_id!("EERNEEnBqdGzBS8dd46wwNY5F2kwnaCQ3vsq2fNKGogZ");
+//     }
+//     pub mod ust_usdt {
+//         solana_program::declare_id!("8sFf9TW3KzxLiBXcDcjAxqabEsRroo4EiRr3UG1xbJ9m");
+//     }
+//     pub mod stsol_sol {
+//         solana_program::declare_id!("2iDSTGhjJEiRxNaLF27CY6daMYPs5hgYrP2REHd5YD62");
+//     }
+//     pub mod usdh_usdc {
+//         solana_program::declare_id!("CaFjigEgJdtGPxQxRjneA1hzNcY5MsHoAAL6Et67QrC5");
+//     }
+// }
 
 #[derive(Copy, Clone, IntoPrimitive, TryFromPrimitive, Debug)]
 #[cfg_attr(test, derive(Arbitrary))]
@@ -92,13 +92,13 @@ impl FeeTier {
     pub fn from_rin_balance(market: &Pubkey, rin_held: u64, msrm_held: u64) -> FeeTier {
         let one_rin = 1_000_000_000;
 
-        if market == &stable_markets::usdt_usdc::ID
-            || market == &stable_markets::msol_sol::ID
-            || market == &stable_markets::stsol_sol::ID
-            || market == &stable_markets::usdh_usdc::ID
-        {
-            return FeeTier::Stable;
-        }
+        // if market == &stable_markets::usdt_usdc::ID
+        //     || market == &stable_markets::msol_sol::ID
+        //     || market == &stable_markets::stsol_sol::ID
+        //     || market == &stable_markets::usdh_usdc::ID
+        // {
+        //     return FeeTier::Stable;
+        // }
 
         match () {
             () if rin_held >= one_rin * 1_125_000 => FeeTier::RIN6,
