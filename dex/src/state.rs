@@ -26,7 +26,7 @@ use crate::{
     error::{DexErrorCode, DexResult, SourceFileId, DexError},
     fees::{self, FeeTier},
     instruction::{
-        disable_authority, fee_sweeper, msrm_token, srm_token, CancelOrderInstructionV2,
+        disable_authority, fee_sweeper, mrin_token, rin_token, CancelOrderInstructionV2,
         InitializeMarketInstruction, MarketInstruction, NewOrderInstructionV3, SelfTradeBehavior,
         SendTakeInstruction,
     },
@@ -540,7 +540,7 @@ impl MarketState {
         let market_addr = self.pubkey();
         let srm_or_msrm_account = match srm_or_msrm_account {
             Some(a) => a,
-            None => return Ok(FeeTier::from_srm_and_msrm_balances(&market_addr, 0, 0)),
+            None => return Ok(FeeTier::from_rin_balance(&market_addr, 0, 0)),
         };
         let data = srm_or_msrm_account.inner().try_borrow_data()?;
 
@@ -549,23 +549,23 @@ impl MarketState {
         let (mint, owner, &[balance]) = array_refs![&aligned_data, 4, 4, 1];
 
         check_assert_eq!(owner, expected_owner)?;
-        if mint == &srm_token::ID.to_aligned_bytes() {
-            return Ok(FeeTier::from_srm_and_msrm_balances(
+        if mint == &rin_token::ID.to_aligned_bytes() {
+            return Ok(FeeTier::from_rin_balance(
                 &market_addr,
                 balance,
                 0,
             ));
         }
 
-        if mint == &msrm_token::ID.to_aligned_bytes() {
-            return Ok(FeeTier::from_srm_and_msrm_balances(
+        if mint == &mrin_token::ID.to_aligned_bytes() {
+            return Ok(FeeTier::from_rin_balance(
                 &market_addr,
                 0,
                 balance,
             ));
         }
 
-        Ok(FeeTier::from_srm_and_msrm_balances(&market_addr, 0, 0))
+        Ok(FeeTier::from_rin_balance(&market_addr, 0, 0))
     }
 
     fn check_enabled(&self) -> DexResult {

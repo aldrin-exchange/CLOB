@@ -31,12 +31,11 @@ mod stable_markets {
 #[repr(u8)]
 pub enum FeeTier {
     Base,
-    SRM2,
-    SRM3,
-    SRM4,
-    SRM5,
-    SRM6,
-    MSRM,
+    RIN2,
+    RIN3,
+    RIN4,
+    RIN5,
+    RIN6,
     Stable,
 }
 
@@ -90,13 +89,11 @@ const fn rebate_tenth_of_bps(tenth_of_bps: u64) -> U64F64 {
 
 impl FeeTier {
     #[inline]
-    pub fn from_srm_and_msrm_balances(market: &Pubkey, srm_held: u64, msrm_held: u64) -> FeeTier {
-        let one_srm = 1_000_000;
+    pub fn from_rin_balance(market: &Pubkey, rin_held: u64, msrm_held: u64) -> FeeTier {
+        let one_rin = 1_000_000_000;
 
         if market == &stable_markets::usdt_usdc::ID
             || market == &stable_markets::msol_sol::ID
-            || market == &stable_markets::ust_usdc::ID
-            || market == &stable_markets::ust_usdt::ID
             || market == &stable_markets::stsol_sol::ID
             || market == &stable_markets::usdh_usdc::ID
         {
@@ -104,12 +101,11 @@ impl FeeTier {
         }
 
         match () {
-            () if msrm_held >= 1 => FeeTier::MSRM,
-            () if srm_held >= one_srm * 1_000_000 => FeeTier::SRM6,
-            () if srm_held >= one_srm * 100_000 => FeeTier::SRM5,
-            () if srm_held >= one_srm * 10_000 => FeeTier::SRM4,
-            () if srm_held >= one_srm * 1_000 => FeeTier::SRM3,
-            () if srm_held >= one_srm * 100 => FeeTier::SRM2,
+            () if rin_held >= one_rin * 1_125_000 => FeeTier::RIN6,
+            () if rin_held >= one_rin * 450_000 => FeeTier::RIN5,
+            () if rin_held >= one_rin * 125_000 => FeeTier::RIN4,
+            () if rin_held >= one_rin * 25_000 => FeeTier::RIN3,
+            () if rin_held >= one_rin * 5000 => FeeTier::RIN2,
             () => FeeTier::Base,
         }
     }
@@ -122,13 +118,12 @@ impl FeeTier {
     fn taker_rate(self) -> U64F64 {
         use FeeTier::*;
         match self {
-            Base => fee_tenth_of_bps(40),
-            SRM2 => fee_tenth_of_bps(39),
-            SRM3 => fee_tenth_of_bps(38),
-            SRM4 => fee_tenth_of_bps(36),
-            SRM5 => fee_tenth_of_bps(34),
-            SRM6 => fee_tenth_of_bps(32),
-            MSRM => fee_tenth_of_bps(30),
+            Base => fee_tenth_of_bps(30),
+            RIN2 => fee_tenth_of_bps(29),
+            RIN3 => fee_tenth_of_bps(28),
+            RIN4 => fee_tenth_of_bps(26),
+            RIN5 => fee_tenth_of_bps(24),
+            RIN6 => fee_tenth_of_bps(22),
             Stable => fee_tenth_of_bps(10),
         }
     }
