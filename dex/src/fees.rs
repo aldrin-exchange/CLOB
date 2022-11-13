@@ -101,18 +101,28 @@ impl FeeTier {
         // }
 
         match () {
-            () if rin_held >= one_rin * 1_125_000 => FeeTier::RIN6,
-            () if rin_held >= one_rin * 450_000 => FeeTier::RIN5,
-            () if rin_held >= one_rin * 125_000 => FeeTier::RIN4,
-            () if rin_held >= one_rin * 25_000 => FeeTier::RIN3,
-            () if rin_held >= one_rin * 5000 => FeeTier::RIN2,
+            // () if rin_held >= one_rin * 1_125_000 => FeeTier::RIN6,
+            // () if rin_held >= one_rin * 450_000 => FeeTier::RIN5,
+            // () if rin_held >= one_rin * 125_000 => FeeTier::RIN4,
+            // () if rin_held >= one_rin * 25_000 => FeeTier::RIN3,
+            // () if rin_held >= one_rin * 5000 => FeeTier::RIN2,
             () => FeeTier::Base,
         }
     }
 
     #[inline]
     pub fn maker_rebate(self, pc_qty: u64) -> u64 {
-        rebate_tenth_of_bps(0).mul_u64(pc_qty).floor()
+        use FeeTier::*;
+        let rate = match self {
+            Base => rebate_tenth_of_bps(20),
+            RIN2 => rebate_tenth_of_bps(20),
+            RIN3 => rebate_tenth_of_bps(0),
+            RIN4 => rebate_tenth_of_bps(0),
+            RIN5 => rebate_tenth_of_bps(0),
+            RIN6 => rebate_tenth_of_bps(0),
+            Stable => rebate_tenth_of_bps(0),
+        };
+        rate.mul_u64(pc_qty).floor()
     }
 
     fn taker_rate(self) -> U64F64 {
