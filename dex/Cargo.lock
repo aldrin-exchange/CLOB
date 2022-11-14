@@ -237,6 +237,35 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "clob"
+version = "0.6.0"
+dependencies = [
+ "arbitrary",
+ "arrayref",
+ "bincode",
+ "bumpalo",
+ "bytemuck",
+ "byteorder",
+ "enumflags2",
+ "field-offset",
+ "hexdump",
+ "itertools 0.9.0",
+ "num-traits",
+ "num_enum",
+ "proptest",
+ "proptest-derive",
+ "rand 0.7.3",
+ "safe-transmute",
+ "serde",
+ "solana-program",
+ "solana-security-txt",
+ "spl-token",
+ "static_assertions",
+ "thiserror",
+ "without-alloc",
+]
+
+[[package]]
 name = "constant_time_eq"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -981,34 +1010,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "serum_dex"
-version = "0.5.6"
-dependencies = [
- "arbitrary",
- "arrayref",
- "bincode",
- "bumpalo",
- "bytemuck",
- "byteorder",
- "enumflags2",
- "field-offset",
- "hexdump",
- "itertools 0.9.0",
- "num-traits",
- "num_enum",
- "proptest",
- "proptest-derive",
- "rand 0.7.3",
- "safe-transmute",
- "serde",
- "solana-program",
- "spl-token",
- "static_assertions",
- "thiserror",
- "without-alloc",
-]
-
-[[package]]
 name = "sha2"
 version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1123,6 +1124,12 @@ dependencies = [
  "rustversion",
  "syn 1.0.74",
 ]
+
+[[package]]
+name = "solana-security-txt"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f14189df19df7f3977a7ea236ccae6cdc40855ab5baf1ab2796a091ef5c490d1"
 
 [[package]]
 name = "spl-token"

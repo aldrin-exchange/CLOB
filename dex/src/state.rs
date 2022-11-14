@@ -23,10 +23,10 @@ use spl_token::error::TokenError;
 
 use crate::{
     critbit::Slab,
-    error::{DexErrorCode, DexResult, SourceFileId, DexError},
+    error::{DexError, DexErrorCode, DexResult, SourceFileId},
     fees::{self, FeeTier},
     instruction::{
-        disable_authority, fee_sweeper, msrm_token, srm_token, CancelOrderInstructionV2,
+        disable_authority, fee_sweeper, rin_token, CancelOrderInstructionV2,
         InitializeMarketInstruction, MarketInstruction, NewOrderInstructionV3, SelfTradeBehavior,
         SendTakeInstruction,
     },
@@ -535,37 +535,25 @@ impl MarketState {
     fn load_fee_tier(
         &self,
         expected_owner: &[u64; 4],
-        srm_or_msrm_account: Option<account_parser::TokenAccount>,
+        rin_account: Option<account_parser::TokenAccount>,
     ) -> DexResult<FeeTier> {
         let market_addr = self.pubkey();
-        let srm_or_msrm_account = match srm_or_msrm_account {
+        let rin_account = match rin_account {
             Some(a) => a,
-            None => return Ok(FeeTier::from_srm_and_msrm_balances(&market_addr, 0, 0)),
+            None => return Ok(FeeTier::from_rin_balance(&market_addr, 0)),
         };
-        let data = srm_or_msrm_account.inner().try_borrow_data()?;
+        let data = rin_account.inner().try_borrow_data()?;
 
         let mut aligned_data: [u64; 9] = Zeroable::zeroed();
         bytes_of_mut(&mut aligned_data).copy_from_slice(&data[..72]);
         let (mint, owner, &[balance]) = array_refs![&aligned_data, 4, 4, 1];
 
         check_assert_eq!(owner, expected_owner)?;
-        if mint == &srm_token::ID.to_aligned_bytes() {
-            return Ok(FeeTier::from_srm_and_msrm_balances(
-                &market_addr,
-                balance,
-                0,
-            ));
+        if mint == &rin_token::ID.to_aligned_bytes() {
+            return Ok(FeeTier::from_rin_balance(&market_addr, balance));
         }
 
-        if mint == &msrm_token::ID.to_aligned_bytes() {
-            return Ok(FeeTier::from_srm_and_msrm_balances(
-                &market_addr,
-                0,
-                balance,
-            ));
-        }
-
-        Ok(FeeTier::from_srm_and_msrm_balances(&market_addr, 0, 0))
+        Ok(FeeTier::from_rin_balance(&market_addr, 0))
     }
 
     fn check_enabled(&self) -> DexResult {
@@ -1759,7 +1747,7 @@ pub(crate) mod account_parser {
                 ref spl_token_program_acc,
                 ref vault_signer_acc,
             ]: &'a [AccountInfo<'b>; MIN_ACCOUNTS] = fixed_accounts;
-            let srm_or_msrm_account = match fee_discount_account {
+            let rin_account = match fee_discount_account {
                 &[] => None,
                 &[ref account] => Some(TokenAccount::new(account)?),
                 _ => check_unreachable!()?,
@@ -1769,7 +1757,7 @@ pub(crate) mod account_parser {
 
             let signer = SignerAccount::new(signer_acc)?;
             let fee_tier = market
-                .load_fee_tier(&signer.inner().key.to_aligned_bytes(), srm_or_msrm_account)
+                .load_fee_tier(&signer.inner().key.to_aligned_bytes(), rin_account)
                 .or(check_unreachable!())?;
             let req_q = market.load_request_queue_mut(req_q_acc)?;
             let event_q = market.load_event_queue_mut(event_q_acc)?;
@@ -1856,7 +1844,7 @@ pub(crate) mod account_parser {
                 ref spl_token_program_acc,
                 ref rent_sysvar_acc,
             ]: &'a [AccountInfo<'b>; MIN_ACCOUNTS] = fixed_accounts;
-            let srm_or_msrm_account = match fee_discount_account {
+            let rin_account = match fee_discount_account {
                 &[] => None,
                 &[ref account] => Some(TokenAccount::new(account)?),
                 _ => check_unreachable!()?,
@@ -1872,7 +1860,7 @@ pub(crate) mod account_parser {
 
             let owner = SignerAccount::new(owner_acc)?;
             let fee_tier =
-                market.load_fee_tier(&owner.inner().key.to_aligned_bytes(), srm_or_msrm_account)?;
+                market.load_fee_tier(&owner.inner().key.to_aligned_bytes(), rin_account)?;
             let open_orders_address = open_orders_acc.key.to_aligned_bytes();
             let req_q = market.load_request_queue_mut(req_q_acc)?;
             let event_q = market.load_event_queue_mut(event_q_acc)?;
@@ -2757,7 +2745,7 @@ impl State {
 
         // Amount that user deposits into the program
         let deposit_amount;
-        // Amount that user receives after the exchange 
+        // Amount that user receives after the exchange
         let withdraw_amount;
 
         // Token accounts for transfers
@@ -3066,7 +3054,7 @@ impl State {
                         }
                         return Err(err);
                     }
-                    _ => return Err(err)
+                    _ => return Err(err),
                 }
             }
         }

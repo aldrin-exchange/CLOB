@@ -1,11 +1,11 @@
 [package]
-name = "serum_dex"
-version = "0.5.6"
-description = "Serum DEX"
-repository = "https://github.com/project-serum/serum-dex"
+name = "clob"
+version = "0.6.0"
+description = "CLOB"
+repository = "https://github.com/aldrin-exchange/CLOB"
 edition = "2018"
 license = "Apache-2.0"
-authors = ["Serum Foundation <foundation@projectserum.com>"]
+authors = ["Serum Foundation <foundation@projectserum.com>", "Aldrin Labs <labs@aldrin.com>"]
 
 [features]
 program = []
@@ -33,6 +33,8 @@ num-traits = "0.2.12"
 arrayref = "0.3.6"
 bytemuck = { version = "1.4.0" }
 byteorder = "1.3.4"
+solana-security-txt = "1.0.1"
+
 
 [lib]
 crate-type = ["cdylib", "lib"]
