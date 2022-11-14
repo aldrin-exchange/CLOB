@@ -4,9 +4,9 @@ use anchor_lang::solana_program::instruction::Instruction;
 use anchor_lang::solana_program::system_program;
 use anchor_lang::Accounts;
 use anchor_spl::{dex, token};
-use serum_dex::instruction::*;
-use serum_dex::matching::Side;
-use serum_dex::state::OpenOrders;
+use clob::instruction::*;
+use clob::matching::Side;
+use clob::state::OpenOrders;
 use std::mem::size_of;
 
 /// Per request context. Can be used to share data between middleware handlers.
@@ -156,7 +156,7 @@ impl MarketMiddleware for OpenOrdersPda {
     ///
     /// 0. Dex program.
     /// 1. System program.
-    /// .. serum_dex::MarketInstruction::InitOpenOrders.
+    /// .. clob::MarketInstruction::InitOpenOrders.
     ///
     /// Data:
     ///
@@ -463,7 +463,7 @@ impl ReferralFees {
 impl MarketMiddleware for ReferralFees {
     /// Accounts:
     ///
-    /// .. serum_dex::MarketInstruction::SettleFunds.
+    /// .. clob::MarketInstruction::SettleFunds.
     fn settle_funds(&self, ctx: &mut Context) -> ProgramResult {
         let referral = token::accessor::authority(&ctx.accounts[9])?;
         require!(referral == self.referral, ErrorCode::InvalidReferral);
