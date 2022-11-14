@@ -24,11 +24,6 @@ pub mod rin_token {
     declare_id!("E5ndSkaB17Dm7CsD22dvcjfrYSDLCxFcMd6z8ddCk5wp");
 }
 
-pub mod mrin_token {
-    use solana_program::declare_id;
-    declare_id!("E5ndSkaB17Dm7CsD22dvcjfrYSDLCxFcMd6z8ddCk5wp");
-}
-
 pub mod disable_authority {
     use solana_program::declare_id;
     declare_id!("authDd29F6XxZo4nrge6A9ynQjDnbPBppmoDzTfbJDb");

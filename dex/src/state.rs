@@ -26,7 +26,7 @@ use crate::{
     error::{DexError, DexErrorCode, DexResult, SourceFileId},
     fees::{self, FeeTier},
     instruction::{
-        disable_authority, fee_sweeper, mrin_token, rin_token, CancelOrderInstructionV2,
+        disable_authority, fee_sweeper, rin_token, CancelOrderInstructionV2,
         InitializeMarketInstruction, MarketInstruction, NewOrderInstructionV3, SelfTradeBehavior,
         SendTakeInstruction,
     },
@@ -551,10 +551,6 @@ impl MarketState {
         check_assert_eq!(owner, expected_owner)?;
         if mint == &rin_token::ID.to_aligned_bytes() {
             return Ok(FeeTier::from_rin_balance(&market_addr, balance));
-        }
-
-        if mint == &mrin_token::ID.to_aligned_bytes() {
-            return Ok(FeeTier::from_rin_balance(&market_addr, 0));
         }
 
         Ok(FeeTier::from_rin_balance(&market_addr, 0))
