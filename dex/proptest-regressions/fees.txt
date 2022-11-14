@@ -11,3 +11,5 @@ cc b3842b8e54e75a5cb3ea6d88502e5554b85b0692f9052c10d63e9cff22d7f109 # shrinks to
 cc 5cd1755c99d9ae0ebb337bea4e06232b56969eb3de16b6046ab412c917c42110 # shrinks to tier = Base, qty = 8145290727158952980
 cc cb5c7d1e0d218ac8e9d2805ea0dbba23f00b9ca3cd0aa7ef3ab476f23bf99960 # shrinks to tier = Base, qty = 18373251069431824319
 cc 8d3d8a94b4828fa9e1d3af1ad47cf00e348b3fb69dd62092737de4fb58af0237 # shrinks to tier = SRM5, qty = 13208427130465543844
+
+### need to update to new RIN numbers

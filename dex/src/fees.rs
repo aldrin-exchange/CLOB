@@ -89,7 +89,7 @@ const fn rebate_tenth_of_bps(tenth_of_bps: u64) -> U64F64 {
 
 impl FeeTier {
     #[inline]
-    pub fn from_rin_balance(market: &Pubkey, rin_held: u64, msrm_held: u64) -> FeeTier {
+    pub fn from_rin_balance(market: &Pubkey, rin_held: u64) -> FeeTier {
         let one_rin = 1_000_000_000;
 
         // if market == &stable_markets::usdt_usdc::ID
