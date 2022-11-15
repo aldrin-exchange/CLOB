@@ -1,19 +1,13 @@
-name: Build verifiable Anchor program
-run-name: ${{ github.actor }} is building a verifiable DEX program
+name: anchor-build
+run-name: ${{ github.actor }} is verifying a DEX program.
 on: 
   push:
     branches:
       - 'master'
       - 'github-actions'
-  pull_request:
-    types:
-      - opened
-    branches:
-      - 'master'
 jobs:
   build-in-container:
     runs-on: ubuntu-latest
-    container: projectserum/build:v0.18.2
     steps:
       - name: Check for dockerenv file
         run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
