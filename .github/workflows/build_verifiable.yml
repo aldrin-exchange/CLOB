@@ -1,0 +1,20 @@
+name: Build verifiable Anchor program
+run-name: ${{ github.actor }} is building a verifiable program.
+on: 
+  push:
+    branches:
+      - 'master'
+      - 'github-actions'
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'master'
+jobs:
+  build-in-container:
+    runs-on: ubuntu-latest
+    container: projectserum/build:v0.18.2
+    steps:
+      - run: echo "runs inside docker container"
+      - run: lscpu
+      
