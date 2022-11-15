@@ -1,16 +1,28 @@
-name: anchor-build
-run-name: ${{ github.actor }} is verifying a DEX program.
-on: 
+name: Anchor
+
+on:
   push:
-    branches:
-      - 'master'
-      - 'github-actions'
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
 jobs:
-  build-in-container:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check for dockerenv file
-        run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
-      - run: pwd 
-      - run: ls -al
-      - run: printenv
+    - name: Install Solana
+      run: sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+    - name: Update and install deps
+      run: sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y pkg-config build-essential libudev-dev libssl-dev
+    - name: Install Anchor and avm
+      run: cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+    - name: Use latest Anchor version
+      run: avm install latest && avm use latest
+    - uses: actions/checkout@v3
+    - name: Build
+      run: cd ./dex && anchor build --verifiable
