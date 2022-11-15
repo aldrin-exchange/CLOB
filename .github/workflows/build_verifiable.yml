@@ -1,5 +1,5 @@
 name: Build verifiable Anchor program
-run-name: ${{ github.actor }} is building a verifiable program.
+run-name: ${{ github.actor }} is building a verifiable DEX program
 on: 
   push:
     branches:
@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     container: projectserum/build:v0.18.2
     steps:
-      - run: echo "runs inside docker container"
-      - run: lscpu
-      
+      - name: Check for dockerenv file
+        run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
+      - run: pwd 
+      - run: ls -al
+      - run: printenv
