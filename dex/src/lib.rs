@@ -15,7 +15,7 @@ pub mod state;
 
 solana_security_txt::security_txt! {
     name: "Aldrin Labs",
-    project_url: "http://aldrin.com",
+    project_url: "https://aldrin.com",
     contacts: "email:security@aldrin.com",
     source_code: "https://github.com/aldrin-exchange/CLOB/tree/master/dex",
     policy: "https://github.com/aldrin-exchange/CLOB/blob/master/SECURITY.md"
