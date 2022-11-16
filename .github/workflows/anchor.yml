@@ -15,14 +15,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install Solana
-      run: sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
-    - name: Update and install deps
-      run: sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y pkg-config build-essential libudev-dev libssl-dev
-    - name: Install Anchor and avm
-      run: cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
-    - name: Use latest Anchor version
-      run: avm install latest && avm use latest
-    - uses: actions/checkout@v3
-    - name: Build
-      run: cd ./dex && anchor build --verifiable
+    - name: Build & get binary from container
+      run: cd ./dex && docker build -o out .
