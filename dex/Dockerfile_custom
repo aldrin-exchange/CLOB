@@ -1,0 +1,14 @@
+# use in case something is wrong with projectserum image
+FROM rust:1.65
+
+WORKDIR /source
+ADD . .
+
+RUN rm $(find ./ -type f -name Cargo.lock)
+RUN sh -c "$(curl -sSfL https://release.solana.com/v1.14.7/install)"
+ENV PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
+RUN cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+RUN avm install 0.25.0 && avm use 0.25.0
+ENV PATH="$PATH:/root/.avm/bin"
+
+CMD ["anchor", "build"]

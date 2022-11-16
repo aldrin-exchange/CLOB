@@ -1,10 +1,11 @@
-name: Anchor
+name: Anchor build
 
 on:
   push:
-    branches: [ "master", "github-actions" ]
+    branches: ["master", "github-actions"]
   pull_request:
-    branches: [ "master" ]
+    types: [closed]
+    branches: ["master"]
 
 env:
   CARGO_TERM_COLOR: always
@@ -16,7 +17,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build & get binary from container
-      run: cd ./dex && docker build -o out .
-    - name: Check existence of binary
-      run: ls -al ./out
+    - name: Build container
+      run: cd ./dex && docker build -t anchor-build .
+    - name: Run anchor build inside a container
+      run: docker run -v $(pwd)/docker-target:/source/target anchor-build
+    - name: Install Solana and add it to PATH
+      run: sh -c "$(curl -sSfL https://release.solana.com/v1.14.7/install)"
+    - run: export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
+    - run: solana --version
