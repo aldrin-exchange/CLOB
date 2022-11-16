@@ -32,16 +32,27 @@ fn random_pubkey<'bump, G: rand::Rng>(_rng: &mut G, bump: &'bump Bump) -> &'bump
 }
 
 struct MarketAccounts<'bump> {
+    /// CHECK: Blank to fix build.
     market: AccountInfo<'bump>,
+    /// CHECK: Blank to fix build.
     req_q: AccountInfo<'bump>,
+    /// CHECK: Blank to fix build.
     event_q: AccountInfo<'bump>,
+    /// CHECK: Blank to fix build.
     bids: AccountInfo<'bump>,
+    /// CHECK: Blank to fix build.
     asks: AccountInfo<'bump>,
+    /// CHECK: Blank to fix build.
     coin_vault: AccountInfo<'bump>,
+    /// CHECK: Blank to fix build.
     pc_vault: AccountInfo<'bump>,
+    /// CHECK: Blank to fix build.
     coin_mint: AccountInfo<'bump>,
+    /// CHECK: Blank to fix build.
     pc_mint: AccountInfo<'bump>,
+    /// CHECK: Blank to fix build.
     rent_sysvar: AccountInfo<'bump>,
+    /// CHECK: Blank to fix build.
     vault_signer: AccountInfo<'bump>,
 }
 
