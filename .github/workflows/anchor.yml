@@ -23,5 +23,8 @@ jobs:
       run: docker run -v $(pwd)/docker-target:/source/target anchor-build
     - name: Install Solana and add it to PATH
       run: sh -c "$(curl -sSfL https://release.solana.com/v1.14.7/install)"
-    - run: export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
-    - run: solana --version
+    - run: export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+    - name: Check solana version
+      run: solana --version
+    - name: Check docker build output
+      run: ls -al ./docker-target
