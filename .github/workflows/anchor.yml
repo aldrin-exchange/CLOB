@@ -15,5 +15,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v3
     - name: Build & get binary from container
       run: cd ./dex && docker build -o out .
