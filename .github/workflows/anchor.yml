@@ -18,3 +18,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build & get binary from container
       run: cd ./dex && docker build -o out .
+    - name: Check existence of binary
+      run: ls -al ./out
