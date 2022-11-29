@@ -1,0 +1,5 @@
+imports_granularity = "Crate"
+group_imports = "StdExternalCrate"
+edition = "2021"
+max_width = 80
+wrap_comments = true

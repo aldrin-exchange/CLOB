@@ -1,0 +1,74 @@
+{
+  "GcoKtAmTy5QyuijXSmJKBtFdt99e6Buza18Js7j9AJ6e": {
+    "address": "GcoKtAmTy5QyuijXSmJKBtFdt99e6Buza18Js7j9AJ6e",
+    "deprecated": false,
+    "name": "ALEPH/USDC",
+    "programId": "9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin",
+    "baseMintAddress": "CsZ5LZkDS7h9TDKjrbL7VAwQZ9nsRu8vJLhRYfmGaN8K",
+    "quoteMintAddress": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "baseTokenAccount": "CChCBMdfPDUMq3RFrm3tPLz8trSDmASofybGrhYxA2pt",
+    "quoteTokenAccount": "CXbynXRZcKCGNiA396gZWqn3ybyzPp9nz6Y8SC8xGiqp",
+    "baseSymbol": "ALEPH",
+    "quoteSymbol": "USDC"
+  },
+  "A8YFbxQYFVqKZaoYJLLUVcQiWP7G2MeEgW5wsAQgMvFw": {
+    "address": "A8YFbxQYFVqKZaoYJLLUVcQiWP7G2MeEgW5wsAQgMvFw",
+    "deprecated": false,
+    "name": "BTC/USDC",
+    "programId": "9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin",
+    "baseMintAddress": "9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E",
+    "quoteMintAddress": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "baseTokenAccount": "9eBhtot9aDrvBwGNCj9opcBPdbGwKBGsWxegVBnwPvZA",
+    "quoteTokenAccount": "CXbynXRZcKCGNiA396gZWqn3ybyzPp9nz6Y8SC8xGiqp",
+    "baseSymbol": "BTC",
+    "quoteSymbol": "USDC"
+  },
+  "4tSvZvnbyzHXLMTiFonMyxZoHmFqau1XArcRCVHLZ5gX": {
+    "address": "4tSvZvnbyzHXLMTiFonMyxZoHmFqau1XArcRCVHLZ5gX",
+    "deprecated": false,
+    "name": "ETH/USDC",
+    "programId": "9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin",
+    "baseMintAddress": "2FPyTwcZLUg1MDrwsyoP4D6s1tM7hAkHYRjkNb5w6Pxk",
+    "quoteMintAddress": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "baseTokenAccount": "EnHeePTZK2KWAZTiTXnZgYuGw6Tcf1o9kJLbzPayk9ZF",
+    "quoteTokenAccount": "CXbynXRZcKCGNiA396gZWqn3ybyzPp9nz6Y8SC8xGiqp",
+    "baseSymbol": "ETH",
+    "quoteSymbol": "USDC"
+  },
+  "ByRys5tuUWDgL73G8JBAEfkdFf8JWBzPBDHsBVQ5vbQA": {
+    "address": "ByRys5tuUWDgL73G8JBAEfkdFf8JWBzPBDHsBVQ5vbQA",
+    "deprecated": false,
+    "name": "SRM/USDC",
+    "programId": "9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin",
+    "baseMintAddress": "SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt",
+    "quoteMintAddress": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "baseTokenAccount": "FTrF49XaaDBNa2psUQ3RN5RhXy5PJyy9b2D4FjpsuG5N",
+    "quoteTokenAccount": "CXbynXRZcKCGNiA396gZWqn3ybyzPp9nz6Y8SC8xGiqp",
+    "baseSymbol": "SRM",
+    "quoteSymbol": "USDC"
+  },
+  "A1Q9iJDVVS8Wsswr9ajeZugmj64bQVCYLZQLra2TMBMo": {
+    "address": "A1Q9iJDVVS8Wsswr9ajeZugmj64bQVCYLZQLra2TMBMo",
+    "deprecated": false,
+    "name": "SUSHI/USDC",
+    "programId": "9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin",
+    "baseMintAddress": "AR1Mtgh7zAtxuxGd2XPovXPVjcSdY3i4rQYisNadjfKy",
+    "quoteMintAddress": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "baseTokenAccount": "6F6N6PPdGnkJ3ub3gDUcuThbsvf74Keej1arPEPJjMJa",
+    "quoteTokenAccount": "CXbynXRZcKCGNiA396gZWqn3ybyzPp9nz6Y8SC8xGiqp",
+    "baseSymbol": "SUSHI",
+    "quoteSymbol": "USDC"
+  },
+  "4LUro5jaPaTurXK737QAxgJywdhABnFAMQkXX4ZyqqaZ": {
+    "address": "4LUro5jaPaTurXK737QAxgJywdhABnFAMQkXX4ZyqqaZ",
+    "deprecated": false,
+    "name": "SXP/USDC",
+    "programId": "9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin",
+    "baseMintAddress": "SF3oTvfWzEP3DTwGSvUXRrGTvr75pdZNnBLAH9bzMuX",
+    "quoteMintAddress": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "baseTokenAccount": "EjGgoUmToXViNdiSBP9e8usEFc8Qj8R8uuYAXiGSKjSk",
+    "quoteTokenAccount": "CXbynXRZcKCGNiA396gZWqn3ybyzPp9nz6Y8SC8xGiqp",
+    "baseSymbol": "SXP",
+    "quoteSymbol": "USDC"
+  }
+}

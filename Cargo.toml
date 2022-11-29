@@ -3,12 +3,11 @@ members = [
     "assert-owner",
     "common",
     "dex/crank",
+    "dex/multicrank",
     "dex/permissioned",
     "pool",
     "pool/schema",
     "pool/examples/admin-controlled",
     "pool/examples/simple",
 ]
-exclude = [
-    "dex",
-]
+exclude = ["dex"]
