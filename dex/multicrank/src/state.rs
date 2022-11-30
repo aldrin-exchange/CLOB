@@ -129,6 +129,7 @@ impl State {
     fn from_json(state_json: &Path) -> Result<Self> {
         let state_file = fs::read_to_string(state_json)?;
         let mut state_de: State = serde_json::from_str(&state_file)?;
+        state_de.import_cranks()?;
         state_de.restart_cranks()?;
 
         Ok(state_de)
@@ -190,8 +191,10 @@ impl State {
         let markets_file = fs::read_to_string(&self.params.markets)?;
         let markets_de: Markets = serde_json::from_str(&markets_file)?;
 
-        for (_, market) in markets_de.markets {
-            self.add_market(market, None)?;
+        for (market_id, market) in markets_de.markets {
+            if !self.cranks.contains_key(&market_id) {
+                self.add_market(market, None)?;
+            }
         }
 
         Ok(())
