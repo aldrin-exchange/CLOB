@@ -19,6 +19,8 @@ pub struct CrankInstance {
     pub name: Option<String>,
     /// Path to the crank binary.
     crank_bin: PathBuf,
+    /// RPC endpoint.
+    rpc: String,
     /// `--dex-program-id` parameter of the crank consume-events subcommand.
     pub dex_program_id: String,
     /// `--payer` parameter of the crank consume-events subcommand.
@@ -67,6 +69,7 @@ impl CrankInstance {
         Self {
             name: market_info.name,
             crank_bin: params.crank.to_owned(),
+            rpc: params.rpc.to_owned(),
             dex_program_id: market_info.program_id,
             payer: params.gas_payer.to_owned(),
             market: market_info.address.clone(),
@@ -115,6 +118,7 @@ impl CrankInstance {
     /// Assemble `crank` arguments.
     fn arrange_args(&self) -> Vec<String> {
         vec![
+            self.rpc.to_owned(),
             "consume-events".to_owned(),
             "--dex-program-id".to_owned(),
             self.dex_program_id.to_owned(),

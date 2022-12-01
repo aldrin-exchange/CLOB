@@ -29,6 +29,9 @@ pub struct Arguments {
     /// Path to the crank binary
     #[arg(short, long)]
     crank: PathBuf,
+    /// RPC endpoint
+    #[arg(short, long)]
+    rpc: String,
     /// Path to gas payer id.json
     #[arg(short, long)]
     gas_payer: PathBuf,

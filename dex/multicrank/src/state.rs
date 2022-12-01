@@ -33,6 +33,8 @@ pub struct State {
 pub struct Parameters {
     /// Path to the crank binary
     pub crank: PathBuf,
+    /// RPC endpoint
+    pub rpc: String,
     /// Path to gas payer id.json
     pub gas_payer: PathBuf,
     /// Server socket
@@ -58,6 +60,7 @@ impl From<&Arguments> for Parameters {
 
         Self {
             crank: args.crank.to_owned(),
+            rpc: args.rpc.to_owned(),
             gas_payer: args.gas_payer.to_owned(),
             socket: args.socket,
             markets: markets_path,
