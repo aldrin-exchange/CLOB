@@ -15,6 +15,14 @@
 ### Mandatory
 * `--crank /path/to/bin/crank`
 * - clob crank binary
+* `--rpc mainnet`
+* - either a custom RPC endpoint or one of the following:
+  * `testnet` => https://api.testnet.solana.com
+  * `mainnet` => https://api.mainnet-beta.solana.com
+  * `vipmainnet` => https://vip-api.mainnet-beta.solana.com
+  * `devnet` => https://api.devnet.solana.com
+  * `localnet` => http://127.0.0.1:8899
+  * `debug` => http://34.90.18.145:8899
 * `--gas-payer /path/to/id.json`
 * - private key of gas payer
 * `--socket 8080` 
@@ -27,7 +35,7 @@
 * - default is `~/.multicrank`
 ### Example
 ```bash
-./multicrank --crank /usr/bin/crank --gas-payer ./id.json \
+./multicrank --crank /usr/bin/crank --rpc mainnet --gas-payer ./id.json \
  --socket 3030 --markets .dex/multicrank/markets_example.json
 ```
 
