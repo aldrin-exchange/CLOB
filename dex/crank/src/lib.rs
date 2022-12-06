@@ -37,24 +37,24 @@ use solana_sdk::transaction::Transaction;
 use spl_token::instruction as token_instruction;
 use warp::Filter;
 
-use serum_common::client::rpc::{
-    create_and_init_mint, create_token_account, mint_to_new_account, send_txn, simulate_transaction,
-};
-use serum_common::client::Cluster;
-use serum_dex::instruction::{
+use clob::instruction::{
     cancel_order_by_client_order_id as cancel_order_by_client_order_id_ix,
     cancel_orders_by_client_order_ids as cancel_orders_by_client_order_ids_ix,
     close_open_orders as close_open_orders_ix, init_open_orders as init_open_orders_ix,
     MarketInstruction, NewOrderInstructionV3, SelfTradeBehavior,
 };
-use serum_dex::matching::{OrderType, Side};
-use serum_dex::state::gen_vault_signer_key;
-use serum_dex::state::Event;
-use serum_dex::state::EventQueueHeader;
-use serum_dex::state::QueueHeader;
-use serum_dex::state::Request;
-use serum_dex::state::RequestQueueHeader;
-use serum_dex::state::{AccountFlag, Market, MarketState, MarketStateV2};
+use clob::matching::{OrderType, Side};
+use clob::state::gen_vault_signer_key;
+use clob::state::Event;
+use clob::state::EventQueueHeader;
+use clob::state::QueueHeader;
+use clob::state::Request;
+use clob::state::RequestQueueHeader;
+use clob::state::{AccountFlag, Market, MarketState, MarketStateV2};
+use serum_common::client::rpc::{
+    create_and_init_mint, create_token_account, mint_to_new_account, send_txn, simulate_transaction,
+};
+use serum_common::client::Cluster;
 
 pub fn with_logging<F: FnOnce()>(_to: &str, fnc: F) {
     fnc();
@@ -392,7 +392,7 @@ pub struct MarketPubkeys {
 
 #[cfg(target_endian = "little")]
 fn remove_dex_account_padding<'a>(data: &'a [u8]) -> Result<Cow<'a, [u64]>> {
-    use serum_dex::state::{ACCOUNT_HEAD_PADDING, ACCOUNT_TAIL_PADDING};
+    use clob::state::{ACCOUNT_HEAD_PADDING, ACCOUNT_TAIL_PADDING};
     let head = &data[..ACCOUNT_HEAD_PADDING.len()];
     if data.len() < ACCOUNT_HEAD_PADDING.len() + ACCOUNT_TAIL_PADDING.len() {
         return Err(format_err!(
@@ -1107,7 +1107,7 @@ pub fn init_open_orders(
                 client,
                 program_id,
                 &owner.pubkey(),
-                size_of::<serum_dex::state::OpenOrders>(),
+                size_of::<clob::state::OpenOrders>(),
             )?;
             orders_keypair = orders_key;
             signers.push(&orders_keypair);
@@ -1156,7 +1156,7 @@ pub fn place_order(
                 client,
                 program_id,
                 &payer.pubkey(),
-                size_of::<serum_dex::state::OpenOrders>(),
+                size_of::<clob::state::OpenOrders>(),
             )?;
             orders_keypair = orders_key;
             signers.push(&orders_keypair);
@@ -1284,7 +1284,7 @@ pub fn list_market(
     let pc_vault = create_token_account(client, pc_mint, &listing_keys.vault_signer_pk, payer)?;
     debug_println!("Created account: {} ...", pc_vault.pubkey());
 
-    let init_market_instruction = serum_dex::instruction::initialize_market(
+    let init_market_instruction = clob::instruction::initialize_market(
         &market_key.pubkey(),
         program_id,
         coin_mint,
